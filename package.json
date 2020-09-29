@@ -1,0 +1,11 @@
+{
+  "name": "wallet-server",
+  "version": "1.0.0",
+  "description": "wallet server",
+  "main": "index.js",
+  "repository": "https://github.com/switch-coder/wallet-server",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3"
+  }
+}
