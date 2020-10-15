@@ -50,7 +50,7 @@ const resolvers = {
         },
 
         logout: (_, __, { user }) => {
-            if (user?.token) {
+            if (user.token) {
                 // 로그인 상태라면(토큰이 존재하면)
                 user.token = "";
                 return true;
