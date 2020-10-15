@@ -14,7 +14,7 @@
     "graphql": "^15.3.0"
   },
   "scripts": {
-    "heroku-postbuild": "cd wallet-server && yarn install && yarn build",
+    "heroku-postbuild": "yarn install && yarn build",
     "start": "nodemon --exec babel-node src/index.js",
     "start:dev": "nodemon --exec babel-node src/index.js"
   },
