@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "wallet server",
   "main": "index.js",
+  "type": "module",
   "repository": "https://github.com/switch-coder/wallet-server",
   "license": "MIT",
   "dependencies": {
