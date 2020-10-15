@@ -2,9 +2,8 @@ import { AuthenticationError, ForbiddenError } from "apollo-server";
 import bcrypt from "bcrypt";
 import sha256 from "crypto-js/sha256";
 import rand from "csprng";
-import cards from "../database/cards";
-import movies from "../database/movies";
-import users from "../database/users";
+import cards from "../database/cards.js";
+import users from "../database/users.js";
 
 const resolvers = {
     Query: {
