@@ -1,4 +1,4 @@
-import users from '../database/users.mjs';
+import users from '../database/users.js';
 
 const context = ({ req }) => {
     const token = req.headers.authorization || '';

@@ -1,8 +1,8 @@
 
 import { ApolloServer } from "apollo-server";
-import resolvers from "./Graph/resolvers.mjs";
-import context from './Graph/context.mjs';
-import typeDefs from './Graph/typeDefs.mjs';
+import resolvers from "./Graph/resolvers.js";
+import context from './Graph/context.js';
+import typeDefs from './Graph/typeDefs.js';
 
 
 
