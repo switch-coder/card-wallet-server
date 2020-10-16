@@ -7,21 +7,27 @@
   "license": "MIT",
   "dependencies": {
     "apollo-server": "^2.18.1",
-    "babel-core": "^7.0.0-bridge.0",
+    "babel": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
     "bcrypt": "^5.0.0",
+    "braces": "^3.0.2",
     "crypto-js": "^4.0.0",
     "csprng": "^0.1.2",
     "graphql": "^15.3.0"
   },
   "scripts": {
-    "prebuild": "yarn start",
-    "start": "nodemon --exec babel-node jusrc/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "npm install",
+    "start": " babel-node src/index.js",
     "start:dev": "nodemon --exec babel-node src/index.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/node": "^7.10.5",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.1",
+    "@babel/node": "^7.12.1",
     "@babel/preset-env": "^7.11.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-preset-env": "1.7.0",
     "nodemon": "^2.0.4"
   },
   "engines": {
