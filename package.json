@@ -5,7 +5,6 @@
   "main": "index.js",
   "repository": "https://github.com/switch-coder/wallet-server",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "apollo-server": "^2.18.1",
     "babel-core": "^7.0.0-bridge.0",
@@ -15,7 +14,8 @@
     "graphql": "^15.3.0"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "prebuild": "yarn start",
+    "start": "nodemon --exec babel-node jusrc/index.js",
     "start:dev": "nodemon --exec babel-node src/index.js"
   },
   "devDependencies": {
