@@ -22,6 +22,7 @@ type User{
 type Query {
   users:[User]!
   me:User  
+  allusers:[User]!
 }
 
 type Mutation {
