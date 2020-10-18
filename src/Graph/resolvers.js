@@ -20,6 +20,7 @@ const resolvers = {
 
             return user;
         },
+        allusers: () => users,
     },
     Mutation: {
         signup: (_, { name, ID, password }) => {
