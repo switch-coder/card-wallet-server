@@ -1,3 +1,3 @@
-const cards = [];
+import mongoose from "mongoose";
 
-export default cards;
+export const Card = mongoose.model("Card", { name: String })

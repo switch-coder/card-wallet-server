@@ -1,3 +1,3 @@
-const users = [];
+import mongoose from "mongoose";
 
-export default users;
+export const User = mongoose.model("User", { ID: String, name: String, passwordHash: String, token: String, cards: ['Card'] })
