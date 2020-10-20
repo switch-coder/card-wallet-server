@@ -2,23 +2,24 @@ import { AuthenticationError, ForbiddenError } from "apollo-server";
 import bcrypt from "bcrypt";
 import sha256 from "crypto-js/sha256";
 import rand from "csprng";
-import { Test } from "../database/cards.js";
+import { Card } from "../database/cards.js";
 import { User } from "../database/users.js";
 
 const resolvers = {
     Query: {
         users: () => User.find(),
-        users: (_, __, { user }) => {
-            if (!user) throw new AuthenticationError("Not Authenticated");
-            return users;
+        users: async (_, __, { toekn }) => {
+            if (!toekn) throw new AuthenticationError("Not Authenticated");
+            const user = await User.findOne({ token });
+            return user;
         },
-        me: (_, __, { user }) => {
-            if (!user) throw new AuthenticationError("Not Authenticated");
-
+        me: async (_, __, { toekn }) => {
+            if (!toekn) throw new AuthenticationError("Not Authenticated");
+            const user = await User.findOne({ token });
             return user;
         },
         allusers: () => User.find(),
-        cards: () => Test.find(),
+        cards: () => Card.find(),
         findUser: async (_, { ID }) => { const user = await User.findOne({ ID }); return user; }
     },
     Mutation: {
@@ -35,10 +36,11 @@ const resolvers = {
                 });
                 try {
                     await newUser.save();
-
+                    console.log(newUser.id)
                 }
                 catch (err) {
                     console.log(err)
+                    return false;
                 }
 
             });
@@ -47,7 +49,7 @@ const resolvers = {
         },
         login: async (_, { ID, password }) => {
             const user = await User.findOne({ ID });
-
+            console.log(user.id);
             if (!user) return null; // 해당 ID가 없을 때
             if (!bcrypt.compareSync(password, user.passwordHash)) return null; // 비밀번호가 일치하지 않을 때
             user.token = sha256(rand(160, 36) + ID + password).toString();
@@ -55,35 +57,44 @@ const resolvers = {
             return user;
         },
 
-        logout: async (_, __, { user }) => {
-            if (user.token) {
+        logout: async (_, __, { token }) => {
+            if (token) {
                 // 로그인 상태라면(토큰이 존재하면)
-                const logoutUser = await User.findOne({ ID: user.ID });
+                const logoutUser = await User.findOne({ token });
+                console.log(logoutUser.id);
+                if (!logoutUser) return false;
                 logoutUser.token = "";
-                logoutUser.save();
                 return true;
             }
 
             throw new AuthenticationError("Not Authenticated"); // 로그인되어 있지 않거나 로그인 토큰이 없을 때
         },
-        addCard: async (_, { name }) => {
+        addCard: async (_, { name, store, img, cardNumber, isCutting }, { token }) => {
 
-            // if (!user) return null; //로그인 안되어있을 경우
+            if (!token) return false; //로그인 안되어있을 경우
+            const user = await User.findOne({ token });
+            if (!user) return false;
+            const newCard = new Card({
+                name,
+                store,
+                img: `../asset/logo/${img}.png`,
+                cardNumber,
+                isCutting,
+            });
+            try {
 
-            // const newCard = {
-            //     id: cards.length + 1,
-            //     name,
-            //     store,
-            //     img: `../asset/logo/${img}.png`,
-            //     cardNumber,
-            //     isCutting,
-            // }
+                await newCard.save();
 
-            // cards.push(newCard);
-            // user.cards.push(id);
-            // return true;
+                user.cards.push(newCard);
+                await user.save();
+            } catch (error) {
+                console.log(error);
+                return false;
+            }
+            return true;
+
         },
-        addCustomCard: (_, { name, store, img, cardNumber, isCutting, color, bgColor }, { user }) => {
+        addCustomCard: (_, { name, store, img, cardNumber, isCutting, color, bgColor }, { toekn }) => {
             if (!user) return null;
             const newCard = {
                 id: cards.length + 1,

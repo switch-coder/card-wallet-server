@@ -1,13 +1,16 @@
-import users from '../database/users.js';
+import { User } from '../database/users.js';
 
-const context = ({ req }) => {
+const context = async ({ req }) => {
     const token = req.headers.authorization || '';
 
     // 로그인되어 있지 않거나 로그인 토큰이 없을 때
-    if (token.length != 64) return { user: null };
+    if (token.length != 64) { return { token } }
 
-    const user = users.find(user => user.token === token);
-    return { user };
+    console.log(token)
+    return { token };
+
+
+
 };
 
 export default context;

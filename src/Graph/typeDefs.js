@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 const typeDefs = gql`
 
 type Card{
-  id:ID!,
+  id:ID,
   name:String,
   store:String,
   img:String,
@@ -11,7 +11,7 @@ type Card{
 }
 
 type User{
-  id:ID!
+  id:ID
   name:String
   ID:String
   passwordHash:String
@@ -28,7 +28,7 @@ type Query {
 }
 
 type Mutation {
-  addCard(name:String,store:String,img:String,cardNumber:Int!,isCutting:Boolean!):Card
+  addCard(name:String,store:String,img:String,cardNumber:Int!,isCutting:Boolean!):Boolean!
   addCustomCard(name:String!,store:String!,img:String,cardNumber:Int!,isCutting:Boolean!,color:String,bgColor:String):Card
   removeUser(id:String!):Boolean!
   login(ID : String!, password: String): User
