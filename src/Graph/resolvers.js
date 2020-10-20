@@ -8,14 +8,15 @@ import { User } from "../database/users.js";
 const resolvers = {
     Query: {
         users: () => User.find(),
-        users: async (_, __, { toekn }) => {
-            if (!toekn) throw new AuthenticationError("Not Authenticated");
+        users: async (_, __, { token }) => {
+            if (!token) throw new AuthenticationError("Not Authenticated");
             const user = await User.findOne({ token });
             return user;
         },
-        me: async (_, __, { toekn }) => {
-            if (!toekn) throw new AuthenticationError("Not Authenticated");
+        me: async (_, __, { token }) => {
+            if (!token) throw new AuthenticationError("Not Authenticated");
             const user = await User.findOne({ token });
+            console.log(user);
             return user;
         },
         allusers: () => User.find(),
