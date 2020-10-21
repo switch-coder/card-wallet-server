@@ -78,7 +78,7 @@ const resolvers = {
             const newCard = new Card({
                 name,
                 store,
-                img: `../asset/logo/${img}.png`,
+                img,
                 cardNumber,
                 isCutting,
                 bgColor,
