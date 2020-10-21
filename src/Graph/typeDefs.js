@@ -6,7 +6,7 @@ type Card{
   name:String,
   store:String,
   img:String,
-  cardNumber:Int,
+  cardNumber:Float,
   isCutting:Boolean,
   bgColor:String,
   color:String
@@ -30,7 +30,7 @@ type Query {
 }
 
 type Mutation {
-  addCard(name:String!,store:String!,img:String!,cardNumber:Int!,isCutting:Boolean!,bgColor:String!,color:String!):Boolean!
+  addCard(name:String!,store:String!,img:String!,cardNumber:Float!,isCutting:Boolean!,bgColor:String!,color:String!):Boolean!
   addCustomCard(name:String!,store:String!,img:String,cardNumber:Int!,isCutting:Boolean!,color:String,bgColor:String):Card
   removeUser(id:String!):Boolean!
   login(ID : String!, password: String!): User
