@@ -70,7 +70,7 @@ const resolvers = {
 
             throw new AuthenticationError("Not Authenticated"); // 로그인되어 있지 않거나 로그인 토큰이 없을 때
         },
-        addCard: async (_, { name, store, img, cardNumber, isCutting }, { token }) => {
+        addCard: async (_, { name, store, img, cardNumber, isCutting, bgColor, color }, { token }) => {
 
             if (!token) return false; //로그인 안되어있을 경우
             const user = await User.findOne({ token });
@@ -81,6 +81,8 @@ const resolvers = {
                 img: `../asset/logo/${img}.png`,
                 cardNumber,
                 isCutting,
+                bgColor,
+                color
             });
             try {
 
