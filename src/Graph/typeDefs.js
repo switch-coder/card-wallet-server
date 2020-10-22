@@ -27,6 +27,7 @@ type Query {
   allusers:[User!]!
   cards:[Card!]!
   findUser(ID:String!): User
+  mydata:User!
 }
 
 type Mutation {

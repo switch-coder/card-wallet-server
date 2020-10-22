@@ -19,6 +19,11 @@ const resolvers = {
             console.log(user);
             return user;
         },
+        mydata: async (_, __, { token }) => {
+            if (!token) throw new AuthenticationError("Not Authenticated");
+            const user = await User.findOne({ token });
+            return user
+        },
         allusers: () => User.find(),
         cards: () => Card.find(),
         findUser: async (_, { ID }) => { const user = await User.findOne({ ID }); return user; }
@@ -87,7 +92,7 @@ const resolvers = {
             try {
 
                 await newCard.save();
-
+                console.log(newCard.id);
                 user.cards.push(newCard);
                 await user.save();
             } catch (error) {
