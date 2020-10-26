@@ -102,6 +102,34 @@ const resolvers = {
             return true;
 
         },
+        mutationCard: async (_, { key, name, cardNumber }, { token }) => {
+            if (!token) return null;
+            const ObjectId = require('mongoose').Types.ObjectId;
+            try {
+                const user = await User.updateOne({ token, "cards._id": new ObjectId(key) }, { $set: { "cards.$.name": name, "cards.$.cardNumber": cardNumber } });
+                const card = await Card.findById(key);
+                card.name = name;
+                card.cardNumber = cardNumber;
+                card.save();
+            }
+            catch (e) { console.log(e); return null };
+            return card;
+        },
+        removeCard: async (_, { key }, { token }) => {
+            if (!token) return null;
+            const ObjectId = require('mongoose').Types.ObjectId;
+            try {
+                const user = await User.updateOne({ token }, { $pull: { cards: { _id: new ObjectId(key) } } });
+                const card = await Card.deleteOne({ _id: new ObjectId(key) });
+                console.log(user);
+                console.log(card);
+
+            } catch (e) {
+                console.log(e);
+                return false;
+            }
+            return true;
+        },
         addCustomCard: (_, { name, store, img, cardNumber, isCutting, color, bgColor }, { toekn }) => {
             if (!user) return null;
             const newCard = {
