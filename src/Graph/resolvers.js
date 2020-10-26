@@ -103,7 +103,7 @@ const resolvers = {
 
         },
         mutationCard: async (_, { key, name, cardNumber }, { token }) => {
-            if (!token) return null;
+            if (!token) return false;
             const ObjectId = require('mongoose').Types.ObjectId;
             try {
                 const user = await User.updateOne({ token, "cards._id": new ObjectId(key) }, { $set: { "cards.$.name": name, "cards.$.cardNumber": cardNumber } });
@@ -112,11 +112,11 @@ const resolvers = {
                 card.cardNumber = cardNumber;
                 card.save();
             }
-            catch (e) { console.log(e); return null };
-            return card;
+            catch (e) { console.log(e); return false };
+            return false;
         },
         removeCard: async (_, { key }, { token }) => {
-            if (!token) return null;
+            if (!token) return false;
             const ObjectId = require('mongoose').Types.ObjectId;
             try {
                 const user = await User.updateOne({ token }, { $pull: { cards: { _id: new ObjectId(key) } } });
