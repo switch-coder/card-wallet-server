@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "wallet server",
   "main": "index.js",
-  "repository": "https://github.com/switch-coder/wallet-server",
+  "repository": "https://github.com/switch-coder/card-wallet-server",
   "license": "MIT",
   "dependencies": {
     "apollo-server": "^2.18.1",

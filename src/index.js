@@ -16,11 +16,8 @@ const startServer = async () => {
     });
 
 
-    const uri = "mongodb+srv://switch-coder:YCO1yS9inwdMJUN0@cluster0.15feh.mongodb.net/<dbname>?retryWrites=true&w=majority";
+    const uri = "";
     await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-
-
 
     server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
         console.log(`🚀 Server ready at ${url}`);

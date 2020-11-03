@@ -9,8 +9,6 @@ const context = async ({ req }) => {
     console.log(token)
     return { token };
 
-
-
 };
 
 export default context;

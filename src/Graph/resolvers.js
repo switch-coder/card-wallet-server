@@ -90,7 +90,6 @@ const resolvers = {
                 color
             });
             try {
-
                 await newCard.save();
                 console.log(newCard.id);
                 user.cards.push(newCard);

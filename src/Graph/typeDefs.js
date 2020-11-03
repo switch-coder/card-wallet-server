@@ -41,8 +41,6 @@ type Mutation {
   logout: Boolean!
 }
 
-
 `;
 
 export default typeDefs;
-// addCard(name:String!,store:String!,img:String!,cardNumber:Int!,isCutting:Boolean!):Boolean!
